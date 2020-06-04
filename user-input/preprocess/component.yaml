@@ -1,0 +1,18 @@
+name: Split-train-Eval - Preprocess
+description: Splits a given input.csv to train and eval csv files
+
+inputs:
+  - {name: project_id, type: String}
+  - {name: dataset_bucket, type: String}
+
+    #outputs:
+    #- {name: train, type: XGBoost model, help: Trained XGBoost model}
+
+implementation:
+  container:
+    image: gcr.io/gcp-demo-2-262319/loan-pipeline-trainevalsplit:latest
+    command: [
+      python, /split_train_eval.py,
+      --project_id, {inputValue: project_id},
+      --dataset_bucket,    {inputValue:  dataset_bucket},
+    ]
